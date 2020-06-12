@@ -27,6 +27,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Use postgresql as the database for Active Record
+gem 'pg', '>= 0.18', '< 2.0'
+
 # Devise for user management
 gem 'devise'
 
