@@ -1,24 +1,55 @@
-# README
+# Rails Library
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## What is this?
 
-Things you may want to cover:
+This is a library system developed with Ruby on Rails.
 
-* Ruby version
+## Usage
 
-* System dependencies
+### 1. Configure your database
 
-* Configuration
+This project uses Postgresql as a database.
+Postgresql can be downloaded here: https://www.postgresql.org/download/
 
-* Database creation
+From the terminal run
 
-* Database initialization
+```bash
+psql postgres
+create role railslibrary with createdb login password 'SomePassword';
+```
 
-* How to run the test suite
+Navigate to the project directory and run
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bundle install
+bundle exec figaro install
+```
 
-* Deployment instructions
+The figaro install command will create an application.yml file in the project's config directory and add this file to the project's git ignore.
 
-* ...
+Inside config/application.yml paste
+
+```bash
+RAILS_LIBRARY_PASSWORD: "SomePassword"
+```
+
+Save the change then run
+
+```bash
+rails db:create
+rails db:schema:load
+```
+
+### 2. Run the application
+
+In the app directory run
+
+```bash
+bundle exec guard
+```
+
+In a separate terminal, in the app directory, run
+
+```bash
+rails s
+```
