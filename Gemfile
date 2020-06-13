@@ -43,6 +43,9 @@ gem 'jquery-rails'
 # Admin Gem
 gem 'rails_admin', '~> 2.0'
 
+# Draper for Decorators
+gem 'draper'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
