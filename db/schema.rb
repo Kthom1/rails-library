@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_034036) do
+ActiveRecord::Schema.define(version: 2020_06_13_080608) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.boolean "checked_out"
+    t.boolean "reserved"
+    t.string "categories", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "checkout_records", force: :cascade do |t|
+    t.datetime "checkout_date"
+    t.datetime "supposed_return_date"
+    t.datetime "actual_return_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reserve_records", force: :cascade do |t|
+    t.datetime "valid_until_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

@@ -7,6 +7,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.text :description
       t.boolean :checked_out
       t.boolean :reserved
+      t.string :categories, array: true, default: []
       t.timestamps
     end
   end
