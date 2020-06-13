@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_191428) do
+ActiveRecord::Schema.define(version: 2020_06_13_192119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(version: 2020_06_13_191428) do
     t.datetime "valid_until_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "staff_id"
+    t.bigint "member_id"
+    t.index ["member_id"], name: "index_reserve_records_on_member_id"
+    t.index ["staff_id"], name: "index_reserve_records_on_staff_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +64,6 @@ ActiveRecord::Schema.define(version: 2020_06_13_191428) do
 
   add_foreign_key "checkout_records", "users", column: "member_id"
   add_foreign_key "checkout_records", "users", column: "staff_id"
+  add_foreign_key "reserve_records", "users", column: "member_id"
+  add_foreign_key "reserve_records", "users", column: "staff_id"
 end
