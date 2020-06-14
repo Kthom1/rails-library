@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(_resource)
     return edit_user_registration_path if current_user.member?
+    return rails_admin_path if current_user.staff?
 
     root_path
   end
