@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reserve Records</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reserve_records.each do |reserve_record| %>
+      <tr>
+        <td><%= link_to 'Show', reserve_record %></td>
+        <td><%= link_to 'Edit', edit_reserve_record_path(reserve_record) %></td>
+        <td><%= link_to 'Destroy', reserve_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reserve Record', new_reserve_record_path %>
