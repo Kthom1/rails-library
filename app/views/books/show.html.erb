@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 <% if !current_user.nil? %>
-  <%= button_to "Check Out", checkout_records_path(checkout_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
-  <%= button_to "Reserve", reserve_records_path(reserve_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
+  <% if !@book.checked_out%> 
+    <%= button_to "Check Out", checkout_records_path(checkout_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
+  <% end %>
+  <% if !@book.reserved%> 
+    <%= button_to "Reserve", reserve_records_path(reserve_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
+  <% end %>
 <% end %>
 <h1 class="text-center">Reserve Status</h1>
 <h2 class="text-center"><%= @book.reserved ? "Reserved" : "Available" %></h2>
