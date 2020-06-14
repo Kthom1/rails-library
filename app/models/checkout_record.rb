@@ -11,6 +11,7 @@ class CheckoutRecord < ApplicationRecord
 
   def self.set_initial(checkout_record_params)
     checkout_record = CheckoutRecord.new(checkout_record_params)
+    checkout_record.checkout_date = Time.now
     checkout_record.supposed_return_date = Time.now + (2 * 7 * 24 * 60 * 60)
     Book.set_checked_out(checkout_record_params[:book_id])
     checkout_record
