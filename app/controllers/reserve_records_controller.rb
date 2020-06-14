@@ -32,7 +32,7 @@ class ReserveRecordsController < ApplicationController
         format.html { redirect_to books_path(id: reserve_record_params[:book_id]), notice: 'Reserve record was successfully created.' }
         format.json { render :show, status: :created, location: @reserve_record }
       else
-        format.html { render :new }
+        format.html { redirect_to books_path(id: reserve_record_params[:book_id]), notice: 'An error occured.' }
         format.json { render json: @reserve_record.errors, status: :unprocessable_entity }
       end
     end

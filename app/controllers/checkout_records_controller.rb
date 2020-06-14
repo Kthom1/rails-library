@@ -28,10 +28,10 @@ class CheckoutRecordsController < ApplicationController
 
     respond_to do |format|
       if @checkout_record.save
-        format.html { redirect_to @checkout_record, notice: 'Checkout record was successfully created.' }
+        format.html { redirect_to books_path(id: checkout_record_params[:book_id]), notice: 'Checkout record was successfully created.' }
         format.json { render :show, status: :created, location: @checkout_record }
       else
-        format.html { render :new }
+        format.html { redirect_to books_path(id: checkout_record_params[:book_id]), notice: 'An error occured.' }
         format.json { render json: @checkout_record.errors, status: :unprocessable_entity }
       end
     end
@@ -70,6 +70,6 @@ class CheckoutRecordsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def checkout_record_params
-    params.fetch(:checkout_record, {}).permit(:member_id, :staff_id)
+    params.require(:checkout_record).permit(:member_id, :book_id)
   end
 end
