@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     redirect_to '/'
   end
 
+  def current_user
+    UserDecorator.decorate(super) unless super.nil?
+  end
+
   def after_sign_in_path_for(_resource)
     return rails_admin_path if current_user.staff?
 
