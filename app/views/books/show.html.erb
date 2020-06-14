@@ -1,4 +1,10 @@
 <p id="notice"><%= notice %></p>
+<button>Reserve</button>
+<button>Check Out</button>
+<h1 class="text-center">Reserve Status</h1>
+<h2 class="text-center"><%= @book.reserved ? "Reserved" : "Available" %></h2>
+<h1 class="text-center">Checkout Status</h1>
+<h2 class="text-center"><%= @book.checked_out ? "Checked Out" : "Available" %></h2>
 <h1 class="text-center">Name</h1>
 <h2 class="text-center"><%= @book.name %></h2>
 <h1 class="text-center">Category</h1>
