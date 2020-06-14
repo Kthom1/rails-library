@@ -46,6 +46,9 @@ gem 'rails_admin', '~> 2.0'
 # Draper for Decorators
 gem 'draper'
 
+# Cancancan for role management
+gem 'cancancan'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
