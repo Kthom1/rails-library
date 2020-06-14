@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
+  rescue_from CanCan::AccessDenied do |_exception|
+    redirect_to '/'
+  end
+
   def after_sign_in_path_for(_resource)
     return rails_admin_path if current_user.staff?
 
