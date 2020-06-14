@@ -1,10 +1,13 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="row">
-        <ul class="nav navbar-nav ">
+      <ul class="nav navbar-nav ">
         <% if current_user.nil? %>
           <li>
             <%= link_to new_user_session_path do %>Sign in<% end %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path do %>Sign up<% end %>
           </li>
         <% else %>
           <li>
@@ -13,5 +16,5 @@
         <% end %>
         </ul>
       </div>
-    </div>
+  </div>
 </nav>
