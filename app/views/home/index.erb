@@ -1,8 +1,14 @@
   <div>
     <h2 class="text-center">Welcome to Rails Library</h2>
+    <h2 class="text-center">Our Most Recent Books</h2>
     <ul>
     <% @books.each do |book| %>
-      <li><%= link_to book.name, books_path(:id => book.id) %></li>
+      <li class="text-center"><%= link_to book.name, books_path(:id => book.id) %></li>
+    <% end %>  
+    </ul>
+    <ul>
+    <% @checked_out_books.each do |book| %>
+      <li class="text-center"><%= link_to book.name, books_path(:id => book.id) %></li>
     <% end %>  
     </ul>
   </div> 
