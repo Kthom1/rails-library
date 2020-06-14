@@ -23,6 +23,7 @@ class Book < ApplicationRecord
 
   def self.cancel_reserve(id)
     book = Book.find(id)
-    book.update_attribute("checked_out", false)
+    book.reserved = false
+    book.save
   end
 end

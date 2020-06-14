@@ -10,6 +10,7 @@ class ReserveRecord < ApplicationRecord
   def self.set_initial(reserve_record_params)
     reserve_record = ReserveRecord.new(reserve_record_params)
     reserve_record.valid_until_date = Time.now + (2 * 7 * 24 * 60 * 60)
+    reserve_record.active = true
     Book.set_reserved(reserve_record_params[:book_id])
     reserve_record
   end

@@ -25,7 +25,6 @@ class ReserveRecordsController < ApplicationController
   # POST /reserve_records
   # POST /reserve_records.json
   def create
-    logger.debug(reserve_record_params)
     @reserve_record = ReserveRecord.set_initial(reserve_record_params)
 
     respond_to do |format|
