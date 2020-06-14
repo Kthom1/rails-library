@@ -2,7 +2,7 @@
     <h2 class="text-center">Welcome to Rails Library</h2>
     <ul>
     <% @books.each do |book| %>
-      <li><%= book.name %></li>
+      <li><%= link_to book.name, books_path(:id => book.id) %></li>
     <% end %>  
     </ul>
   </div> 
