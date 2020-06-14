@@ -2,9 +2,10 @@
 
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :verify_authenticity_token, only: [:index]
   def index
     @books = Book.limit(5).order('id desc')
-    @checked_out_books = current_user ? current_user.books.where(checked_out: true) : []
-    @reserved_books = current_user ? current_user.books.where(reserved: true) : []
+    @checkout_records = current_user ? current_user.checkout_records.where(active: true) : []
+    @reserve_records = current_user ? current_user.reserve_records.where(active: true) : []
   end
 end

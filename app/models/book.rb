@@ -14,4 +14,15 @@ class Book < ApplicationRecord
     book.checked_out = true
     book.save
   end
+
+  def self.set_returned(id)
+    book = Book.find(id)
+    book.checked_out = false
+    book.save
+  end
+
+  def self.cancel_reserve(id)
+    book = Book.find(id)
+    book.update_attribute("checked_out", false)
+  end
 end

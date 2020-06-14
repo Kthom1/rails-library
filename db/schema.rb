@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_163717) do
+ActiveRecord::Schema.define(version: 2020_06_14_221816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_163717) do
     t.bigint "staff_id"
     t.bigint "member_id"
     t.bigint "book_id"
+    t.boolean "active"
     t.index ["book_id"], name: "index_checkout_records_on_book_id"
     t.index ["member_id"], name: "index_checkout_records_on_member_id"
     t.index ["staff_id"], name: "index_checkout_records_on_staff_id"
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_163717) do
     t.bigint "staff_id"
     t.bigint "member_id"
     t.bigint "book_id"
+    t.boolean "active"
     t.index ["book_id"], name: "index_reserve_records_on_book_id"
     t.index ["member_id"], name: "index_reserve_records_on_member_id"
     t.index ["staff_id"], name: "index_reserve_records_on_staff_id"

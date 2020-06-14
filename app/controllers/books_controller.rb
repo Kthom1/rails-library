@@ -3,6 +3,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :verify_authenticity_token, only: [:show]
 
   # GET /books
   # GET /books.json

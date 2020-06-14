@@ -2,6 +2,7 @@
 
 class CheckoutRecordsController < ApplicationController
   before_action :set_checkout_record, only: %i[show edit update destroy]
+  skip_before_action :verify_authenticity_token, only: [:update]
 
   # GET /checkout_records
   # GET /checkout_records.json
@@ -41,11 +42,11 @@ class CheckoutRecordsController < ApplicationController
   # PATCH/PUT /checkout_records/1.json
   def update
     respond_to do |format|
-      if @checkout_record.update(checkout_record_params)
-        format.html { redirect_to @checkout_record, notice: 'Checkout record was successfully updated.' }
+      if @checkout_record.set_returned(update_params)
+        format.html { redirect_to '/', notice: 'Checkout record was successfully updated.' }
         format.json { render :show, status: :ok, location: @checkout_record }
       else
-        format.html { render :edit }
+        format.html { redirect_to '/', notice: 'Something went wrong.' }
         format.json { render json: @checkout_record.errors, status: :unprocessable_entity }
       end
     end
@@ -70,6 +71,10 @@ class CheckoutRecordsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def checkout_record_params
-    params.require(:checkout_record).permit(:member_id, :book_id)
+    params.require(:checkout_record).permit(:id, :member_id, :book_id)
+  end
+
+  def update_params
+    params.permit(:data)
   end
 end

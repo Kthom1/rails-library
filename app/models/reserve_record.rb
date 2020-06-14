@@ -13,4 +13,11 @@ class ReserveRecord < ApplicationRecord
     Book.set_reserved(reserve_record_params[:book_id])
     reserve_record
   end
+
+  def cancel_reserve(_update_params)
+    update_attribute('active', false)
+    Book.cancel_reserve(book_id)
+    save
+    self
+  end
 end

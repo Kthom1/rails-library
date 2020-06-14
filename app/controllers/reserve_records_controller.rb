@@ -2,6 +2,7 @@
 
 class ReserveRecordsController < ApplicationController
   before_action :set_reserve_record, only: %i[show edit update destroy]
+  skip_before_action :verify_authenticity_token, only: [:update]
 
   # GET /reserve_records
   # GET /reserve_records.json
@@ -42,11 +43,11 @@ class ReserveRecordsController < ApplicationController
   # PATCH/PUT /reserve_records/1.json
   def update
     respond_to do |format|
-      if @reserve_record.update(reserve_record_params)
-        format.html { redirect_to @reserve_record, notice: 'Reserve record was successfully updated.' }
+      if @reserve_record.cancel_reserve(update_params)
+        format.html { redirect_to '/', notice: 'Reserve record was successfully updated.' }
         format.json { render :show, status: :ok, location: @reserve_record }
       else
-        format.html { render :edit }
+        format.html { redirect_to '/', notice: 'Something went wrong.' }
         format.json { render json: @reserve_record.errors, status: :unprocessable_entity }
       end
     end
@@ -71,6 +72,10 @@ class ReserveRecordsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def reserve_record_params
-    params.require(:reserve_record).permit(:member_id, :book_id)
+    params.require(:reserve_record).permit(:id, :member_id, :book_id)
+  end
+
+  def update_params
+    params.permit(:data)
   end
 end

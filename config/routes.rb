@@ -3,8 +3,8 @@
 Rails.application.routes.draw do
   root to: 'home#index'
   resource :books, only: [:show]
-  resource :reserve_records, only: [:create]
-  resource :checkout_records, only: [:create]
+  resource :reserve_records, only: %i[create update]
+  resource :checkout_records, only: %i[create update]
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
     registrations: 'members/registrations'

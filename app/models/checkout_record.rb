@@ -14,7 +14,15 @@ class CheckoutRecord < ApplicationRecord
     checkout_record = CheckoutRecord.new(checkout_record_params)
     checkout_record.checkout_date = Time.now
     checkout_record.supposed_return_date = Time.now + (2 * 7 * 24 * 60 * 60)
+    checkout_record.active = true
     Book.set_checked_out(checkout_record_params[:book_id])
     checkout_record
+  end
+
+  def set_returned(_update_params)
+    update_attribute('actual_return_date', Time.now)
+    update_attribute('active', false)
+    Book.set_returned(book_id)
+    save
   end
 end
