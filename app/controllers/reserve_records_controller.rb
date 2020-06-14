@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ReserveRecordsController < ApplicationController
-  before_action :set_reserve_record, only: [:show, :edit, :update, :destroy]
+  before_action :set_reserve_record, only: %i[show edit update destroy]
 
   # GET /reserve_records
   # GET /reserve_records.json
@@ -9,8 +11,7 @@ class ReserveRecordsController < ApplicationController
 
   # GET /reserve_records/1
   # GET /reserve_records/1.json
-  def show
-  end
+  def show; end
 
   # GET /reserve_records/new
   def new
@@ -18,17 +19,17 @@ class ReserveRecordsController < ApplicationController
   end
 
   # GET /reserve_records/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reserve_records
   # POST /reserve_records.json
   def create
-    @reserve_record = ReserveRecord.new(reserve_record_params)
+    logger.debug(reserve_record_params)
+    @reserve_record = ReserveRecord.set_initial(reserve_record_params)
 
     respond_to do |format|
       if @reserve_record.save
-        format.html { redirect_to @reserve_record, notice: 'Reserve record was successfully created.' }
+        format.html { redirect_to books_path(id: reserve_record_params[:book_id]), notice: 'Reserve record was successfully created.' }
         format.json { render :show, status: :created, location: @reserve_record }
       else
         format.html { render :new }
@@ -62,13 +63,14 @@ class ReserveRecordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reserve_record
-      @reserve_record = ReserveRecord.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def reserve_record_params
-      params.fetch(:reserve_record, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reserve_record
+    @reserve_record = ReserveRecord.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def reserve_record_params
+    params.require(:reserve_record).permit(:member_id, :book_id)
+  end
 end

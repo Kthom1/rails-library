@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CheckoutRecordsController < ApplicationController
-  before_action :set_checkout_record, only: [:show, :edit, :update, :destroy]
+  before_action :set_checkout_record, only: %i[show edit update destroy]
 
   # GET /checkout_records
   # GET /checkout_records.json
@@ -9,8 +11,7 @@ class CheckoutRecordsController < ApplicationController
 
   # GET /checkout_records/1
   # GET /checkout_records/1.json
-  def show
-  end
+  def show; end
 
   # GET /checkout_records/new
   def new
@@ -18,13 +19,12 @@ class CheckoutRecordsController < ApplicationController
   end
 
   # GET /checkout_records/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /checkout_records
   # POST /checkout_records.json
   def create
-    @checkout_record = CheckoutRecord.new(checkout_record_params)
+    @checkout_record = CheckoutRecord.set_initial(checkout_record_params)
 
     respond_to do |format|
       if @checkout_record.save
@@ -62,13 +62,14 @@ class CheckoutRecordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_checkout_record
-      @checkout_record = CheckoutRecord.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def checkout_record_params
-      params.fetch(:checkout_record, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_checkout_record
+    @checkout_record = CheckoutRecord.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def checkout_record_params
+    params.fetch(:checkout_record, {}).permit(:member_id, :staff_id)
+  end
 end
