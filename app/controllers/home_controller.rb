@@ -2,5 +2,7 @@
 
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
-  def index; end
+  def index
+    @books = Book.limit(5).order('id desc')
+  end
 end

@@ -1,5 +1,8 @@
   <div>
-    <div class="col-sm-12 col-sm-offset-3">
-      <h2 class="text-center">Welcome to Rails Library</h2>
-    </div>
+    <h2 class="text-center">Welcome to Rails Library</h2>
+    <ul>
+    <% @books.each do |book| %>
+      <li><%= book.name %></li>
+    <% end %>  
+    </ul>
   </div> 
