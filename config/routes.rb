@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   root to: 'home#index'
+  resource :books, only: [:show]
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
     registrations: 'members/registrations'
