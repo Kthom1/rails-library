@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_064117) do
+ActiveRecord::Schema.define(version: 2020_06_14_125926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 2020_06_14_064117) do
     t.text "description"
     t.boolean "checked_out"
     t.boolean "reserved"
-    t.string "categories", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
   end
 
   create_table "checkout_records", force: :cascade do |t|
