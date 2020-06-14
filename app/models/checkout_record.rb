@@ -8,6 +8,7 @@ class CheckoutRecord < ApplicationRecord
   validates :actual_return_date, presence: true, allow_blank: true
   belongs_to :member, class_name: 'User', foreign_key: 'member_id'
   belongs_to :staff, class_name: 'Staff', foreign_key: 'staff_id', optional: true
+  belongs_to :book
 
   def self.set_initial(checkout_record_params)
     checkout_record = CheckoutRecord.new(checkout_record_params)

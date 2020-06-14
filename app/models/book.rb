@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
+  has_many :checkout_records
+  has_many :reserve_records
   def self.set_reserved(id)
     book = Book.find(id)
     book.reserved = true
