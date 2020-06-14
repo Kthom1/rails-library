@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def index
     @books = Book.limit(5).order('id desc')
-    @checked_out_books = current_user.checked_out_books
+    @checked_out_books = current_user ? current_user.books.where(checked_out: true) : []
+    @reserved_books = current_user ? current_user.books.where(reserved: true) : []
   end
 end
