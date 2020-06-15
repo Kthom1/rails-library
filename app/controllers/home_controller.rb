@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     @books = Book.limit(5).order('id desc')
     @checkout_records = current_user ? current_user.checkout_records.where(active: true) : []
     @reserve_records = current_user ? current_user.reserve_records.where(active: true) : []
-    @search_books = Book.where(name: params[:search]) if params[:search]
+    @search_books = Book.where(name: params[:search]) if params[:search] && params[:select] == 'name'
+    @search_books = Book.where(category: params[:search]) if params[:search] && params[:select] == 'category'
   end
 end
