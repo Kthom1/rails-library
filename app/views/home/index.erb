@@ -3,6 +3,14 @@
     <% if !current_user.nil? %>
       <h2 class="text-center"><%= "Welcome back, " + current_user.full_name %></h2>
     <% end %>
+    <% if @search_books %>
+      <h2 class="text-center">Search Results</h2>
+      <ul>
+        <% @search_books.each do |book| %>
+          <li class="text-center"><%= link_to book.name, books_path(:id => book.id) %></li>
+        <% end %>  
+      </ul>
+    <% end %>
     <div>
       <h2 class="text-center">Our Most Recent Books</h2>
       <ul>
