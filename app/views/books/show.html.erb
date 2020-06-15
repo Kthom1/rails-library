@@ -1,20 +1,33 @@
-<p id="notice"><%= notice %></p>
-<% if !current_user.nil? %>
-  <% if !@book.checked_out%> 
-    <%= button_to "Check Out", checkout_records_path(checkout_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
+<div>
+  <% if !current_user.nil? %>
+    <div class="row">
+      <% if !@book.checked_out%> 
+        <%= button_to "Check Out", checkout_records_path(checkout_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
+      <% end %>
+      <% if !@book.reserved%> 
+        <%= button_to "Reserve", reserve_records_path(reserve_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
+      <% end %>
+    <div>
   <% end %>
-  <% if !@book.reserved%> 
-    <%= button_to "Reserve", reserve_records_path(reserve_record: { member_id: current_user.id, book_id: @book.id }, :method => :post)%>
-  <% end %>
-<% end %>
-<h1 class="text-center">Reserve Status</h1>
-<h2 class="text-center"><%= @book.reserved ? "Reserved" : "Available" %></h2>
-<h1 class="text-center">Checkout Status</h1>
-<h2 class="text-center"><%= @book.checked_out ? "Checked Out" : "Available" %></h2>
-<h1 class="text-center">Name</h1>
-<h2 class="text-center"><%= @book.name %></h2>
-<h1 class="text-center">Category</h1>
-<h2 class="text-center"><%= @book.category %></h2>
-<h1 class="text-center">Description</h1>
-<p class="text-center"><%= @book.description %></p>
-<%= link_to 'Back', root_path %>
+  <div class="index-section">
+    <h1 class="text-center">Name</h1>
+    <h2 class="text-center"><%= @book.name %></h2>
+  </div>
+  <div class="index-section">
+    <h1 class="text-center">Category</h1>
+    <h2 class="text-center"><%= @book.category %></h2>
+  </div>
+  <div class="index-section">
+    <h1 class="text-center">Description</h1>
+    <p class="text-center"><%= @book.description %></p>
+  <div class="index-section">
+  <div class="index-section">
+    <h1 class="text-center">Reserve Status</h1>
+    <h2 class="text-center"><%= @book.reserved ? "Reserved" : "Available" %></h2>
+  </div>
+  <div class="index-section">
+    <h1 class="text-center">Checkout Status</h1>
+    <h2 class="text-center"><%= @book.checked_out ? "Checked Out" : "Available" %></h2>
+  </div>
+  <%= link_to 'Back', root_path %>
+</div>
