@@ -25,6 +25,5 @@ class CheckoutRecord < ApplicationRecord
     Book.set_returned(book_id)
     message = "The book you reserved, #{book.name}, has been returned. Please come pick it up."
     Notification.notify(member_id, book_id, message)
-    save
   end
 end

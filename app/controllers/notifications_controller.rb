@@ -2,6 +2,7 @@
 
 class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[show edit update destroy]
+  skip_before_action :verify_authenticity_token, only: [:destroy]
 
   # GET /notifications
   # GET /notifications.json
