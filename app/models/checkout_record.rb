@@ -6,7 +6,7 @@ class CheckoutRecord < ApplicationRecord
   validates :staff_id, presence: true, on: :update
   validates :supposed_return_date, presence: true
   validates :actual_return_date, presence: true, allow_blank: true
-  belongs_to :member, class_name: 'User', foreign_key: 'member_id'
+  belongs_to :member, class_name: 'Member', foreign_key: 'member_id'
   belongs_to :staff, class_name: 'Staff', foreign_key: 'staff_id', optional: true
   belongs_to :book
 
@@ -23,6 +23,8 @@ class CheckoutRecord < ApplicationRecord
     update_attribute('actual_return_date', Time.now)
     update_attribute('active', false)
     Book.set_returned(book_id)
+    message = "The book you reserved, #{book.name}, has been returned. Please come pick it up."
+    Notification.notify(member_id, book_id, message)
     save
   end
 end

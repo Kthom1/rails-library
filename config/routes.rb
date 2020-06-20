@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :books, only: [:show]
   resource :reserve_records, only: %i[create update]
   resource :checkout_records, only: %i[create update]
+  resource :notifications, only: [:destroy]
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
     registrations: 'members/registrations'

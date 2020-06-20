@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_221816) do
+ActiveRecord::Schema.define(version: 2020_06_20_111140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 2020_06_14_221816) do
     t.index ["staff_id"], name: "index_checkout_records_on_staff_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_notifications_on_member_id"
+  end
+
   create_table "reserve_records", force: :cascade do |t|
     t.datetime "valid_until_date"
     t.datetime "created_at", null: false
@@ -64,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_221816) do
     t.string "type"
     t.string "first_name"
     t.string "last_name"
+    t.string "notifications", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -71,6 +80,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_221816) do
   add_foreign_key "checkout_records", "books"
   add_foreign_key "checkout_records", "users", column: "member_id"
   add_foreign_key "checkout_records", "users", column: "staff_id"
+  add_foreign_key "notifications", "users", column: "member_id"
   add_foreign_key "reserve_records", "books"
   add_foreign_key "reserve_records", "users", column: "member_id"
   add_foreign_key "reserve_records", "users", column: "staff_id"

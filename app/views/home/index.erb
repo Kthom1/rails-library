@@ -39,12 +39,25 @@
           <ul>
             <% @reserve_records.each do |record| %>
               <li class="text-center"><%= record.book.name %>
-              <%= button_to("Return", "reserve_records?id=#{record.id}", :method => :patch)%></li>
+              <%= button_to("Cancel Reservation", "reserve_records?id=#{record.id}", :method => :patch)%></li>
             <% end %>  
           </ul>
         <% else %>
           <h3 class="text-center">No books currently reserved</h3>
         <% end %>
       <% end %>
+    </div>
+      <div class="index-section">
+        <h2 class="text-center">Notifications</h2>
+        <% if @notifications && !@notifications.empty?%>
+          <ul>
+            <% @notifications.each do |notification| %>
+              <li class="text-center"><%= notification.message %>
+              <%= button_to("Delete", "notifications?id=#{notification.id}", :method => :delete)%></li>
+            <% end %>  
+          </ul>
+        <% else %>
+          <h3 class="text-center">No notifications</h3>
+        <% end %>
     </div>
   </div> 

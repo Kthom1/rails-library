@@ -9,5 +9,6 @@ class HomeController < ApplicationController
     @reserve_records = current_user ? current_user.reserve_records.where(active: true) : []
     @search_books = Book.where(name: params[:search]) if params[:search] && params[:select] == 'name'
     @search_books = Book.where(category: params[:search]) if params[:search] && params[:select] == 'category'
+    @notifications = current_user ? current_user.notifications : []
   end
 end
