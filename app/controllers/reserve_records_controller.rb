@@ -42,7 +42,7 @@ class ReserveRecordsController < ApplicationController
   # PATCH/PUT /reserve_records/1.json
   def update
     respond_to do |format|
-      if @reserve_record.cancel_reserve(update_params)
+      if @reserve_record.cancel_reserve
         format.html { redirect_to '/', notice: 'Reserve record was successfully updated.' }
         format.json { render :show, status: :ok, location: @reserve_record }
       else

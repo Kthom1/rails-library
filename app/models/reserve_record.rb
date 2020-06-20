@@ -15,7 +15,7 @@ class ReserveRecord < ApplicationRecord
     reserve_record
   end
 
-  def cancel_reserve(_update_params)
+  def cancel_reserve
     update_attribute('active', false)
     Book.cancel_reserve(book_id)
   end

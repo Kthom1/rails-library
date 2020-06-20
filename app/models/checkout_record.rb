@@ -19,7 +19,7 @@ class CheckoutRecord < ApplicationRecord
     checkout_record
   end
 
-  def set_returned(_update_params)
+  def set_returned
     update_attribute('actual_return_date', Time.now)
     update_attribute('active', false)
     Book.set_returned(book_id)

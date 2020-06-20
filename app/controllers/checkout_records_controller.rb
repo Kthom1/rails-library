@@ -42,7 +42,7 @@ class CheckoutRecordsController < ApplicationController
   # PATCH/PUT /checkout_records/1.json
   def update
     respond_to do |format|
-      if @checkout_record.set_returned(update_params)
+      if @checkout_record.set_returned
         format.html { redirect_to '/', notice: 'Checkout record was successfully updated.' }
         format.json { render :show, status: :ok, location: @checkout_record }
       else
